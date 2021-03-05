@@ -50,7 +50,7 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
     $scope.assignableResources = assignableResources;
     // Initialize a newly created item before adding it to the user interface.
     $scope.initializeNewItem = function (item) {
-        item.assignedResource = resource1;
+        item.assignedResource = resourceArray[0];
         console.log('A new item was created.');
     };
     // Allow item deletion by clicking a button in the user interface.

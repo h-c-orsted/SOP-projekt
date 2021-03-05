@@ -1,22 +1,35 @@
 /// <reference path='./DlhSoft.Kanban.Angular.Components.ts'/>
 var KanbanBoard = DlhSoft.Controls.KanbanBoard;
 // Prepare data.
-var state1 = { name: 'New' }, state2 = { name: 'In progress', areNewItemButtonsHidden: true }, state3 = { name: 'Done', isCollapsedByDefaultForGroups: true, areNewItemButtonsHidden: true };
-var states = [state1, state2, state3];
-var resource1 = { name: 'Resource 1', imageUrl: 'Images/Resource1.png' }, resource2 = { name: 'Resource 2', imageUrl: 'Images/Resource2.png' };
-var assignableResources = [resource1, resource2];
-var group1 = { name: 'Story 1', state: state2, assignedResource: resource1 }, group2 = { name: 'Story 2', state: state3, assignedResource: resource2 };
-var groups = [group1, group2];
-var items = [
-    { name: 'Task 1', group: group1, state: state1, assignedResource: resource1 },
-    { name: 'Task 2', group: group1, state: state2, assignedResource: resource1 },
-    { name: 'Bug 1', group: group1, state: state2, assignedResource: resource1, itemType: KanbanBoard.defaultItemTypes.bug },
-    { name: 'Task 3', group: group1, state: state1, assignedResource: resource2 },
-    { name: 'Task 4', group: group1, state: state1, assignedResource: resource1 },
-    { name: 'Task 5', group: group2, state: state1, assignedResource: resource2 },
-    { name: 'Task 6', group: group2, state: state2, assignedResource: resource2 },
-    { name: 'Task 7', group: group2, state: state2, assignedResource: resource1 },
-    { name: 'Task 8', group: group2, state: state3, assignedResource: resource2 }
+//var state1 = { name: 'New' }, state2 = { name: 'In progress', areNewItemButtonsHidden: true }, state3 = { name: 'Done', isCollapsedByDefaultForGroups: true, areNewItemButtonsHidden: true };
+//var resource1 = { name: 'Resource 1', imageUrl: 'Images/Resource1.png' }, resource2 = { name: 'Resource 2', imageUrl: 'Images/Resource2.png' };
+//var group1 = { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[0] }, group2 = { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[1] };
+let statesArray = [
+    { name: 'New' },
+    { name: 'In progress', areNewItemButtonsHidden: true },
+    { name: 'Done', isCollapsedByDefaultForGroups: true, areNewItemButtonsHidden: true }
+];
+let resourceArray = [
+    { name: 'Resource 1', imageUrl: 'Images/Resource1.png' },
+    { name: 'Resource 2', imageUrl: 'Images/Resource2.png' }
+];
+let groupsArray = [
+    { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[0] },
+    { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[1] }
+];
+let states = [statesArray[0], statesArray[1], statesArray[2]];
+let assignableResources = [resourceArray[0], resourceArray[1]];
+let groups = [groupsArray[0], groupsArray[1]];
+let items = [
+    { name: 'Task 1', group: groupsArray[0], state: statesArray[0], assignedResource: resourceArray[0] },
+    { name: 'Task 2', group: groupsArray[0], state: statesArray[1], assignedResource: resourceArray[0] },
+    { name: 'Bug 1', group: groupsArray[0], state: statesArray[1], assignedResource: resourceArray[0], itemType: KanbanBoard.defaultItemTypes.bug },
+    { name: 'Task 3', group: groupsArray[0], state: statesArray[0], assignedResource: resourceArray[1] },
+    { name: 'Task 4', group: groupsArray[0], state: statesArray[0], assignedResource: resourceArray[0] },
+    { name: 'Task 5', group: groupsArray[1], state: statesArray[0], assignedResource: resourceArray[1] },
+    { name: 'Task 6', group: groupsArray[1], state: statesArray[1], assignedResource: resourceArray[1] },
+    { name: 'Task 7', group: groupsArray[1], state: statesArray[1], assignedResource: resourceArray[0] },
+    { name: 'Task 8', group: groupsArray[1], state: statesArray[2], assignedResource: resourceArray[1] }
 ];
 // Uncomment the following code lines to load more groups and items.
 // for (var i = 3; i <= 10; i++) {
@@ -81,4 +94,11 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
             console.log('Item ' + item.name + ' was moved to next iteration.');
         }
     };
+
+    // Implement save and load with localStorage
+    $scope.save = function() {
+        let storage = window.localStorage;
+        let data = {};
+
+    }
 });

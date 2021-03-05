@@ -1,0 +1,29 @@
+﻿body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+header {
+    background-color: #b7042c;
+    border-bottom: 10px solid #f2f2e8;
+    padding: 2px 14px;
+    color: white;
+    margin-bottom: 16px;
+}
+.next-iteration-panel {
+    display: inline-block;
+    margin: 8px 14px;
+    background: #f0f0f0;
+    padding: 16px 24px;
+}
+.next-iteration-panel .header {
+    margin-bottom: 2px;
+    text-align: center;
+}
+.next-iteration-panel .content {
+    font-size: smaller;
+    text-align: center;
+}
+.next-iteration-panel .content .value {
+    display: inline-block;
+    margin: 0 12px;
+}

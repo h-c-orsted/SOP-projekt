@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>Kanban board sample</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
     <!-- Angular framwork. -->
     <script src="Scripts/angular.min.js"></script>
     <!-- DlhSoft component references. TypeScript: DlhSoft.Kanban.Angular.Components.ts. -->
@@ -13,7 +16,7 @@
     <script src="app.js"></script>
 </head>
 <!-- Sample application user interface. -->
-<body ng-app="KanbanBoardSample" ng-controller="MainController">
+<body class="container-fluid" ng-app="KanbanBoardSample" ng-controller="MainController">
     <header>
         <h1>Kanban board sample</h1>
     </header>
@@ -34,6 +37,13 @@
         </div>
     </ds:kanban-item-drop-zone>
 
-    <button onClick="window.localStorage.clear()">Clear data</button>
+    <button class="btn btn-danger" onClick="window.localStorage.clear()">Clear data</button>
+
+<div class="row">
+    <div class="col-12">
+        <i>In order for the save function to work, make sure each name of tasks are unique.</i>
+    </div>
+</div>
+
 </body>
 </html>

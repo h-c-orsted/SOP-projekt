@@ -28,6 +28,7 @@ let items = [
     { name: 'Task 7', group: groupsArray[1], state: statesArray[1], assignedResource: resourceArray[0] },
     { name: 'Task 8', group: groupsArray[1], state: statesArray[2], assignedResource: resourceArray[1] }
 ];
+
 // Uncomment the following code lines to load more groups and items.
 // for (var i = 3; i <= 10; i++) {
 //    var group: KanbanGroup = { name: 'Story ' + i, assignedResource: resource1 };
@@ -173,13 +174,8 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
                 }
             }
             data["items"] = items;
-            console.log(items);
 
             // Save to localStorage
             window.localStorage.setItem("boardData", JSON.stringify(data));
-        }
-
-        $scope.load = function() {
-
         }
     });

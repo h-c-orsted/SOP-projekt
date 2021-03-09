@@ -10,8 +10,11 @@ let statesArray = [
     { name: 'Done', areNewItemButtonsHidden: true }    //{ name: 'Done', isCollapsedByDefaultForGroups: true, areNewItemButtonsHidden: true }
 ];
 let resourceArray = [
-    { name: 'Peter Jensen', imageUrl: 'Images/Resource1.png' },
-    { name: 'Jan Iversen', imageUrl: 'Images/Resource2.png' }
+    { name: 'Peter Jensen', imageUrl: 'Images/Resource1.png', level: 1 },
+    { name: 'Jan Iversen', imageUrl: 'Images/Resource2.png', level: 3 },
+    { name: 'Bo Hansen', imageUrl: 'Images/Resource1.png', level: 2 },
+    { name: 'Anna Pedersen', imageUrl: 'Images/Resource2.png', level: 3 },
+    { name: 'Caroline Steensen', imageUrl: 'Images/Resource1.png', level: 2 },
 ];
 let groupsArray = [
     { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[0] },
@@ -127,6 +130,16 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
                 $scope.save();
             }
         };
+
+        $scope.countTasks = function(name) {
+            let occurrences = 0;
+            for (let i=0; i<items.length; i++) {
+                if (items[i].assignedResource.name === name) {
+                    occurrences++;
+                }
+            }
+            return occurrences;
+        }
 
         // Implement save and load with localStorage
         $scope.save = function() {

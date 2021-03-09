@@ -45,5 +45,29 @@
     </div>
 </div>
 
+<div class="row gap-y">
+    <div class="col-12 col-md-4">
+        <h3>Resource overview</h3>
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Person</th>
+                <th scope="col">Level</th>
+                <th scope="col">Assigned tasks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="person in assignableResources">
+                <td><img ng-src="{{person.imageUrl}}" alt="icon" style="width: 20px;"></td>
+                <td>{{person.name}}</td>
+                <td>{{person.level}}</td>
+                <td>{{countTasks(person.name)}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>

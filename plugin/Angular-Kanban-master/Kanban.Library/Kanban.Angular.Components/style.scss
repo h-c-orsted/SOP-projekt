@@ -1,0 +1,63 @@
+$blue: #8281A0;
+$yellow: #FEE191;
+$green: #B0D8A4;
+
+.disguised-link {
+  &:link {color: #212529; text-decoration: none;}
+  &:visited {color: #212529; text-decoration: none;}
+  &:hover {color: #212529; text-decoration: none;}
+  &:active {color: #212529; text-decoration: none;}
+}
+
+
+.table-button {
+  display: block;
+  width: 100%;
+
+  .dropdown-btn {
+    float: right;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    .dropdown-btn {
+      color: cornflowerblue;
+    }
+  }
+}
+
+
+.color-box-container {
+  display: block;
+  width: 100%;
+
+  $color-box-width: 25px;
+  .color-box {
+    display: inline-block;
+    width: $color-box-width;
+    height: $color-box-width;
+    border-radius: 5px;
+
+    &.new {background-color: $blue;}
+    &.in-progress {background-color: $yellow;}
+    &.done {background-color: $green;}
+  }
+
+  p {
+    display: inline-block;
+    line-height: $color-box-width;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 25px;
+  }
+}
+
+
+.resource-collapse > .card-body {
+  padding: 5px 15px;
+  margin-top: 5px;
+
+  &.state-new {background-color: $blue; color: #fff;}
+  &.state-in-progress {background-color: $yellow;}
+  &.state-done {background-color: $green; color: #fff;}
+}

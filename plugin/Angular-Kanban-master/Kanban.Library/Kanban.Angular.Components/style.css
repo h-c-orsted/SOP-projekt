@@ -1,0 +1,73 @@
+.disguised-link:link {
+  color: #212529;
+  text-decoration: none;
+}
+.disguised-link:visited {
+  color: #212529;
+  text-decoration: none;
+}
+.disguised-link:hover {
+  color: #212529;
+  text-decoration: none;
+}
+.disguised-link:active {
+  color: #212529;
+  text-decoration: none;
+}
+
+.table-button {
+  display: block;
+  width: 100%;
+}
+.table-button .dropdown-btn {
+  float: right;
+  margin-right: 10px;
+}
+.table-button:hover .dropdown-btn {
+  color: cornflowerblue;
+}
+
+.color-box-container {
+  display: block;
+  width: 100%;
+}
+.color-box-container .color-box {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+.color-box-container .color-box.new {
+  background-color: #8281A0;
+}
+.color-box-container .color-box.in-progress {
+  background-color: #FEE191;
+}
+.color-box-container .color-box.done {
+  background-color: #B0D8A4;
+}
+.color-box-container p {
+  display: inline-block;
+  line-height: 25px;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 25px;
+}
+
+.resource-collapse > .card-body {
+  padding: 5px 15px;
+  margin-top: 5px;
+}
+.resource-collapse > .card-body.state-new {
+  background-color: #8281A0;
+  color: #fff;
+}
+.resource-collapse > .card-body.state-in-progress {
+  background-color: #FEE191;
+}
+.resource-collapse > .card-body.state-done {
+  background-color: #B0D8A4;
+  color: #fff;
+}
+
+/*# sourceMappingURL=style.css.map */

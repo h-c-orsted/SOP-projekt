@@ -17,8 +17,9 @@ let resourceArray = [
     { name: 'Caroline Steensen', imageUrl: 'Images/Resource1.png', level: 2 },
 ];
 let groupsArray = [
-    { name: 'Story 1', state: statesArray[1], assignedResource: resourceArray[0] },
-    { name: 'Story 2', state: statesArray[2], assignedResource: resourceArray[1] }
+    { name: 'Sprint 1', state: statesArray[1], assignedResource: resourceArray[0] },
+    { name: 'Sprint 2', state: statesArray[2], assignedResource: resourceArray[1] },
+    { name: 'Sprint 3', state: statesArray[1], assignedResource: resourceArray[3] }
 ];
 let items = [
     { name: 'Task 1', group: groupsArray[0], state: statesArray[0], assignedResource: resourceArray[0] },
@@ -68,6 +69,12 @@ if (window.localStorage.getItem("boardData") !== null) {
     console.log(items);
 }
 
+
+function randInt(min, max)  {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // Exclusive the max value
+}
 
 
 let nextIteration = { groups: [], items: [] };
@@ -131,14 +138,20 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
             }
         };
 
-        $scope.countTasks = function(name) {
+        $scope.countTasks = function(name, returnArray = false) {
             let occurrences = 0;
+            let tasks = [];
             for (let i=0; i<items.length; i++) {
                 if (items[i].assignedResource.name === name) {
                     occurrences++;
+                    tasks.push(items[i]);
                 }
             }
-            return occurrences;
+            if (returnArray) {
+                return tasks;
+            } else {
+                return occurrences;
+            }
         }
 
         // Implement save and load with localStorage
@@ -190,5 +203,25 @@ angular.module('KanbanBoardSample', ['DlhSoft.Kanban.Angular.Components'])
 
             // Save to localStorage
             window.localStorage.setItem("boardData", JSON.stringify(data));
+        }
+
+        $scope.addData = function(count = 5) {
+            let taskCount = $scope.items.length;
+            for (let i=0; i<count; i++) {
+                let object = {
+                    name: 'Task ' + (taskCount+i),
+                    group: $scope.groups[randInt(0, groupsArray.length)],
+                    state: $scope.states[randInt(0, statesArray.length)],
+                    assignedResource: $scope.assignableResources[randInt(0, resourceArray.length)]
+                };
+                $scope.items.push(object);
+            }
+            $scope.save();
+        }
+
+        $scope.randInt = function(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min) + min); // Exclusive the max value
         }
     });

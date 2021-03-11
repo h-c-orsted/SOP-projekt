@@ -1,14 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Board</title>
+    <meta charset="utf-8"/>
+    <title>Kanban board sample</title>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <!-- Angular framwork. -->
+    <script src="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/Scripts/angular.min.js"></script>
+    <!-- DlhSoft component references. TypeScript: DlhSoft.Kanban.Angular.Components.ts. -->
+    <link rel="stylesheet" href="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/DlhSoft.Kanban.Angular.Components.css" type="text/css" />
+    <script src="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/DlhSoft.Kanban.Angular.Components.js"></script>
+    <!-- Sample application references. TypeScript: app.ts. -->
+    <link rel="stylesheet" href="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/app.css" type="text/css" />
+    <script src="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/app.js"></script>
+
+    <link rel="stylesheet" href="plugin/Angular-Kanban-master/Kanban.Library/Kanban.Angular.Components/style.css">
 </head>
-<body>
+<!-- Sample application user interface. -->
+<body class="container-fluid" ng-app="KanbanBoardSample" ng-controller="MainController">
+<header>
+    <h1>Kanban board sample</h1>
+</header>
+<!-- Kanban board component. -->
+<ds:kanban-board items="items" groups="groups" states="states" assignable-resources="assignableResources"
+                 on-adding-new-item="initializeNewItem(item)" on-editing-item="deleteItem(item)"
+                 edit-item-button-text="'×'" edit-item-button-tool-tip="'Delete item'"
+                 on-item-state-changed="onItemStateChanged(item, state)" on-item-group-changed="onItemGroupChanged(item, group)">
+</ds:kanban-board>
+<!-- Drop zone: provides support for dropping Kanban items to external user interface elements. -->
+<!--
+<ds:kanban-item-drop-zone on-drop="moveItemToNextIteration(type, index)"
+                          class="next-iteration-panel"
+                          title="Drag items to this external panel to set them as future work.">
+    <div class="header">Next iteration - future work</div>
+    <div class="content">
+        <div class="value">{{ nextIteration.groups.length }} story(-ies)</div>
+        <div class="value">{{ nextIteration.items.length }} item(s)</div>
+    </div>
+</ds:kanban-item-drop-zone>
+-->
+
+<br>
+<button class="btn btn-success" ng-click="addData(10);">Add data</button>
+<button class="btn btn-danger" onClick="window.localStorage.clear(); location.reload();">Clear data</button>
+
+<div class="row">
+    <div class="col-12">
+        <i>In order for the save function to work, make sure each name of tasks are unique.</i>
+    </div>
+</div>
+
+<div class="row gap-y">
+    <div class="col-12 col-md-5">
+        <h3>Resource overview</h3>
+        <div class="color-box-container">
+            <div class="color-box new"></div><p>New</p>
+            <div class="color-box in-progress"></div><p>In Progress</p>
+            <div class="color-box done"></div><p>Done</p>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="col-1"></th>
+                <th scope="col" class="col-4">Person</th>
+                <th scope="col" class="col-1">Level</th>
+                <th scope="col" class="col-6">Assigned tasks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="person in assignableResources">
+                <td><img ng-src="{{person.imageUrl}}" alt="icon" style="width: 20px;"></td>
+                <td>{{person.name}}</td>
+                <td>{{person.level}}</td>
+
+                <td>
+                    <a ng-attr-href="#collapse{{$index}}" class="disguised-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="collapseExample" role="button">
+                        <div class="table-button">{{countTasks(person.name)}} <i class="bi bi-chevron-down dropdown-btn" ng-show="countTasks(person.name) !== 0"></i></div>
+                    </a>
+
+                    <div class="collapse resource-collapse show" ng-attr-id="collapse{{$index}}">
+                        <div class="card card-body"
+                             ng-repeat="task in countTasks(person.name, true)"
+                             ng-class="{'state-new': task.state.name == 'New', 'state-in-progress': task.state.name == 'In progress', 'state-done': task.state.name == 'Done'}">
+                            {{task.name}}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

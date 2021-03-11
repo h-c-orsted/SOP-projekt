@@ -4,7 +4,7 @@
             <tr class="dskb-row dskb-states-row">
                 <td class="dskb-cell dskb-header dskb-row-header dskb-column-header dskb-toggle-button-area"></td>
                 <td ng-if="!dskb.hideGroups" class="dskb-cell dskb-header dskb-row-header dskb-column-header dskb-content" ng-style="{ width: dskb.groupWidth }" ng-transclude></td>
-                <td ng-repeat="state in dskb.states" class="dskb-cell dskb-header dskb-column-header dskb-state-header" ng-style="{ width: state.width ? state.width : dskb.stateWidth }">
+                <td ng-repeat="state in dskb.states track by $index" class="dskb-cell dskb-header dskb-column-header dskb-state-header" ng-style="{ width: state.width ? state.width : dskb.stateWidth }">
                     <ng-include src="state.templateUrl ? state.templateUrl : dskb.stateTemplateUrl"/>
                 </td>
             </tr>
@@ -14,9 +14,9 @@
                 <td colspan="2" class="dskb-cell dskb-header dskb-row-header dskb-no-items-label">
                     {{ dskb.noItemsLabel }}
                 </td>
-                <td ng-repeat="state in dskb.states" class="dskb-cell dskb-header dskb-column-header dskb-state-header" ng-style="{ width: state.width ? state.width : dskb.stateWidth }"></td>
+                <td ng-repeat="state in dskb.states track by $index" class="dskb-cell dskb-header dskb-column-header dskb-state-header" ng-style="{ width: state.width ? state.width : dskb.stateWidth }"></td>
             </tr>
-            <tr ng-repeat="group in dskb.groups" class="dskb-row dskb-group-row" ng-class="group.isCollapsed ? 'dskb-group-collapsed' : null">
+            <tr ng-repeat="group in dskb.groups track by $index" class="dskb-row dskb-group-row" ng-class="group.isCollapsed ? 'dskb-group-collapsed' : null">
                 <td class="dskb-cell dskb-header dskb-row-header dskb-toggle-button-area" ng-click="group.isCollapsed = !group.isCollapsed">
                     <svg ng-if="!group.isCollapsed" class="dskb-toggle-button" width="8" height="8">
                         <polygon points="1,7 7,7 7,1" class="dskb-toggle-button-expanded"/>
@@ -30,9 +30,9 @@
                         <ng-include src="group.templateUrl ? group.templateUrl : (group.itemType && group.itemType.templateUrl ? group.itemType.templateUrl : dskb.groupTemplateUrl)"/>
                     </div>
                 </td>
-                <td ng-repeat="state in dskb.states" class="dskb-cell dskb-items-container">
+                <td ng-repeat="state in dskb.states track by $index" class="dskb-cell dskb-items-container">
                     <div ng-hide="group.isCollapsed" ng-style="{ height: ((!group.isCollapsed ? dskb.getItemsInGroupAndState(group, dskb.getMaxStateInGroup(group)).length : 1) * dskb.itemHeight + (!dskb.isReadOnly && !dskb.areNewItemButtonsHidden && !dskb.getMaxStateInGroup(group).isReadOnly && !dskb.getMaxStateInGroup(group).areNewItemButtonsHidden && !group.isReadOnly ? 26 : 0)) + 'px' }">
-                        <div ng-repeat="item in dskb.getItemsInGroupAndState(group, state)" ds:kanban-item-drop-zone can-drop="dskb.canDropItem(type, index, group, state, dskb.items.indexOf(item))" on-drop="dskb.onItemDrop(type, index, group, state, dskb.items.indexOf(item))">
+                        <div ng-repeat="item in dskb.getItemsInGroupAndState(group, state) track by $index" ds:kanban-item-drop-zone can-drop="dskb.canDropItem(type, index, group, state, dskb.items.indexOf(item))" on-drop="dskb.onItemDrop(type, index, group, state, dskb.items.indexOf(item))">
                             <div ng-style="{ height: dskb.itemHeight + 'px' }" class="dskb-content-box">
                                 <ng-include src="item.templateUrl ? item.templateUrl : (item.itemType && item.itemType.templateUrl ? item.itemType.templateUrl : dskb.itemTemplateUrl)"/>
                             </div>
